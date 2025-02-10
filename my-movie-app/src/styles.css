@@ -8,10 +8,11 @@ header {
     background-color: #e09434 ;
     padding: 20px;
     text-align: center;
+   
 }
 
 nav {
-    background-color: #e09434;
+    background-color: #000000;
     padding: 15px 0;
     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3);
 }
@@ -31,7 +32,7 @@ nav ul li {
 
 nav ul li a {
     text-decoration: none;
-    color: #000000;
+    color: white;
     font-size: 18px;
     font-weight: 500;
     padding: 10px 15px;
@@ -46,6 +47,11 @@ nav ul li a:hover {
 
 h1 {
     font-family: 'Playfair Display', serif;
+}
+
+main h2, p {
+    padding: 20px;
+    text-align: center;
 }
 
 #search-section {
@@ -141,10 +147,10 @@ input{
 
 /* Favorites section*/
 #favorites-section {
-    max-width: 800px;
+    max-width: 900px;
     margin: 40px auto;
     padding: 20px;
-    background-color: #000000;
+    background-color: #6e6a6a;
     border-radius: 8px;
     color: #fff;
     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3);
