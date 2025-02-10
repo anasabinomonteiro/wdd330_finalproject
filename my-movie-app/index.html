@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Movie&Serie Discovery App</title>
+    <link rel="stylesheet" href="/src/styles.css" />
+    <script type="module" src="/src/js/app.js" defer></script>
+  </head>
+  <body>
+    <header>
+      <h1>Movie&Serie Discovery</h1>
+      <p>
+        The Movie and Series Discovery App is a web application that allows
+        users to search for movies and series, view descriptions, ratings,
+        trailers, and where to watch.
+      </p>
+
+      <nav>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="favorites.html">Favorites</a></li>          
+        </ul>
+      </nav>
+      
+    </header>
+    <main>
+      <h2>Discover Movies and Series</h2>
+      <p>
+        Search for movies and series, view descriptions, ratings, trailers, and
+        where to watch.
+      </p>
+
+      <section id="search-section">
+        <form id="search-form">
+          <label for="search-input">Search for a movie or series:</label>
+          <input
+            type="text"
+            id="search-input"
+            placeholder="Enter Title"
+            required
+          />
+          <button type="submit" id="search-button">Search</button>
+        </form>
+      </section>
+
+      <section id="results-section">
+        <h2>Results</h2>
+        <div id="results-container"></div>
+      </section>     
+
+      <section id="favorites-section">
+        <h2>Favorites</h2>
+        <div id="favorites-container">
+          <div class="favorite">
+            <h3>Title</h3>
+            <p>Description</p>
+            <p>Rating</p>
+            <p>Trailer</p>
+            <p>Where to watch</p>
+          </div>
+        </div>
+      </section>
+    </main>
+    <!-- Modal to show movie details -->
+    <div id="details-modal" class="modal">
+      <div class="modal-content">
+        <span class="close-button">&times;</span>
+        <img id="modal-poster" alt="Poster">
+        <h3 id="modal-title">Title</h3>
+        <p id="modal-description">Description</p>
+        <p id="modal-rating">Rating</p>
+        <p id="modal-where-to-watch">Where to watch</p>
+      </div>
+    </div>
+    <footer>
+      <p>&copy; 2025 Movie&Serie Discovery App</p>
+    </footer>
+  </body>
+</html>
