@@ -1,5 +1,6 @@
 import { viewDetails } from "./details.js";
 import { addFavorite } from "./favorites.js";
+import { fetchSimilarMovies } from "./api.js";
 
 export function displaySearchResults(movies) {
     const resultsContainer = document.getElementById('results-container');
@@ -62,4 +63,32 @@ export function displaySearchResults(movies) {
             }
         });
     })
-};
+}
+
+export async function displayRecommendations() {
+    const searchHistory = JSON.parse(localStorage.getItem('searchHistory')) || [];
+    const recommendationsContainer = document.getElementById('rec-container');
+
+    if (!recommendationsContainer) {
+        console.warn('Warning: Recommendations container not found!');
+        return;
+    }
+
+    recommendationsContainer.innerHTML = ''; // clear previous results before displaying new ones
+
+    for (let movieId of searchHistory) {
+        const similarMovies = await fetchSimilarMovies(movieId);
+
+        similarMovies.forEach(movie => {
+            const movieCard = document.createElement('div');
+            movieCard.classList.add('movie-card');
+            movieCard.innerHTML = `
+            <img src="https://image.tmdb.org/t/p/w200${movie.poster_path}" alt="${movie.title}" />
+            <h3>${movie.title}</h3>
+            <p>${movie.release_date}</p>
+            `;
+
+            recommendationsContainer.appendChild(movieCard);
+        });
+    }
+}

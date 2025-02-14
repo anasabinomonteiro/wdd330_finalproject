@@ -5,7 +5,7 @@ const BASE_URL_OMDB = 'http://www.omdbapi.com';
 
 //function to search for movies/series by title
 export async function fetchMovies(query) {
-    const response = await fetch(`${BASE_URL_TMDB}/search/movie?api_key=${API_KEY}&query=${query}`);
+    const response = await fetch(`${BASE_URL_TMDB}/search/movie?api_key=${TMDB_API_KEY}&query=${query}`);
     const data = await response.json();
     return data.results;
 }
@@ -65,5 +65,37 @@ export async function fetchOMDBRatings(imdbId) {
     } catch (error) {
         console.error('Error fetching ratings', error);
         return null;
+    }
+}
+
+// Search recommendations based on a movie that the user was viewing
+export async function fetchSimilarMovies(movieId) {
+    try {
+        const response = await fetch(`${BASE_URL_TMDB}/movie/${movieId}/similar?api_key=${TMDB_API_KEY}`);
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        const data = await response.json();
+        return data.results;
+    } catch (error) {
+        console.error('Error fetching similar movies', error);
+        return null;
+    }
+}
+
+export async function fetchWhereToWatch(movieId) {
+    try {
+        const response = await fetch(`${BASE_URL_TMDB}/movie/${movieId}/watch/providers?api_key=${TMDB_API_KEY}`);
+
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+
+        const data = await response.json();
+        return data.results?.US?.flatrate || [];
+
+    } catch (error) {
+        console.error('Error fetching where to watch', error);
+        return [];
     }
 }
