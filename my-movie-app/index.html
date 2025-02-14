@@ -9,13 +9,15 @@
   </head>
   <body>
     <header>
-      <h1>Movie & Serie Discovery</h1>
+      <div class="logo-title">
+        <img src="data/logo/Logo 500x500 px.jpeg" alt="Logo" class="logo" />
+        <h1>Movie & Serie Discovery</h1>
+      </div>
       <p>
         The Movie and Series Discovery App is a web application that allows
         users to search for movies and series, view descriptions, ratings,
         trailers, and where to watch.
       </p>
-
       <nav>
         <ul>
           <li><a href="index.html">Home</a></li>
@@ -55,12 +57,24 @@
         <img id="modal-poster" alt="Poster" />
         <h3 id="modal-title">Title</h3>
         <p id="modal-description">Description</p>
-        <p id="modal-rating">Rating</p>
+        <p id="modal-rating-tmdb">TMDb Rating:</p>
+        <p id="modal-rating-imdb">IMDb Rating:</p>
         <p id="modal-where-to-watch">Where to watch</p>
+        <p id="modal-trailer">Trailer</p>
+        <!-- Users comments section -->
+        <div id="user-comments">
+          <h4>User Comments:</h4>
+          <ul id="comments-list"></ul>
+          <textarea
+            id="comment-input"
+            placeholder="Leave your comment..."
+          ></textarea>
+          <button id="submit-comment">Submit your comment</button>
+        </div>
       </div>
     </div>
     <footer>
-      <p>&copy; 2025 Movie&Serie Discovery App</p>
+      <p>&copy; <span id="currentYear"></span> ♦ WDD330 - Project - Movie&Serie Discovery App ♦</p>
     </footer>
   </body>
 </html>
