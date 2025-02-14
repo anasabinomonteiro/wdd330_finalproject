@@ -3,9 +3,10 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Movie&Serie Discovery App</title>
+    <title>Favorites - Movie&Serie Discovery App</title>
     <link rel="stylesheet" href="../src/styles.css" />
-    <script type="module" src="../src/js/favorites.js" defer></script>
+    <script type="module" src="../src/js/app.js" defer></script>  
+    <script type="module" src="../src/js/favorites.js" defer></script>    
   </head>
   <body>
     <header>
@@ -17,6 +18,7 @@
         <ul>
           <li><a href="index.html">Home</a></li>
           <li><a href="pages/favorites.html">Favorites</a></li>
+          <li><a href="where_watch.html">Where To Watch</a></li>
         </ul>
       </nav>
     </header>
@@ -30,9 +32,20 @@
           <!-- Update from js here -->
         </div>
       </section>
+
+      <section>
+        <h2>Recommendations based on your research</h2>
+        <div id="rec-container" class="recommendations-grid"></div>
+      </section>
+
+      <section id="results-section" style="display:none;">
+        <div id="results-container"></div>
+      </section>
+
     </main>
     <footer>
       <p>&copy; <span id="currentYear"></span> ♦ WDD330 - Project - Movie&Serie Discovery App ♦</p>
     </footer>
+    
   </body>
 </html>

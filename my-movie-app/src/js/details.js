@@ -1,4 +1,5 @@
 import { fetchMovieDetails, fetchTMDBRatings, fetchOMDBRatings } from "./api.js";
+import { saveSearchHistory } from "./search.js";
 
 export async function viewDetails(movieId) {
     console.log('Movie Id', movieId)
@@ -46,10 +47,10 @@ export async function viewDetails(movieId) {
 
         // Search and display TMDb evaluations
         const tmdbRatings = await fetchTMDBRatings(movieId);
-        document.getElementById('modal-rating-tmdb').textContent = 
-            (tmdbRatings && tmdbRatings.rating  && tmdbRatings.voteCount)
-            ? `TMDB Rating: ${tmdbRatings.rating} (${tmdbRatings.voteCount} votes)`
-            : 'No TMDB rating available';
+        document.getElementById('modal-rating-tmdb').textContent =
+            (tmdbRatings && tmdbRatings.rating && tmdbRatings.voteCount)
+                ? `TMDB Rating: ${tmdbRatings.rating} (${tmdbRatings.voteCount} votes)`
+                : 'No TMDB rating available';
 
         // Search and display OMDB evaluations
         const omdbRatings = await fetchOMDBRatings(details.imdb_id);
@@ -74,7 +75,7 @@ export async function viewDetails(movieId) {
         // Load comments when opening the modal
         loadComments(movieId);
 
-        // Event listeener for add comment button
+        // Event listener for add comment button
         const submitButton = document.getElementById('submit-comment');
         if (submitButton) {
             submitButton.addEventListener('click', () => {
@@ -87,6 +88,9 @@ export async function viewDetails(movieId) {
                 }
             });
         }
+
+        // Save search history
+        saveSearchHistory(movieId);
 
         // Open Modal   
         modal.style.display = 'flex';
