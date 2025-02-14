@@ -1,4 +1,4 @@
-import { fetchMovieDetails } from "./api.js";
+import { fetchMovieDetails, fetchTMDBRatings, fetchOMDBRatings } from "./api.js";
 
 export async function viewDetails(movieId) {
     console.log('Movie Id', movieId)
@@ -13,13 +13,14 @@ export async function viewDetails(movieId) {
 
         const modalTitle = document.getElementById('modal-title');
         const modalDescription = document.getElementById('modal-description');
-        const modalRating = document.getElementById('modal-rating');
+        const modalRating_TMDB = document.getElementById('modal-rating-tmdb');
+        const modalRating_IMDB = document.getElementById('modal-rating-imdb');
         const modalWhereToWatch = document.getElementById('modal-where-to-watch');
         const modalPoster = document.getElementById('modal-poster');
         const modalTrailer = document.getElementById('modal-trailer');
         const modal = document.getElementById('details-modal');
 
-        if (!modalTitle || !modalDescription || !modalRating || !modalWhereToWatch || !modalPoster || !modalTrailer || !modal) {
+        if (!modalTitle || !modalDescription || !modalRating_TMDB || !modalRating_IMDB || !modalWhereToWatch || !modalPoster || !modalTrailer || !modal) {
             console.error('Error: Missing required elements in the modal');
             return;
         }
@@ -27,7 +28,8 @@ export async function viewDetails(movieId) {
         // Show details in the modal
         modalTitle.textContent = details.title || 'No title available';
         modalDescription.textContent = details.overview || 'No description available';
-        modalRating.textContent = `Rating: ${details.vote_average || 'N/A'}`;
+        modalRating_TMDB.textContent = `Rating: ${details.vote_average || 'N/A'}`;
+        modalRating_IMDB.textContent = `IMDB ID: ${details.imdb_id || 'N/A'}`;
         modalWhereToWatch.textContent = 'Available on: ' + (details.homepage || 'No information available');
 
         // Show Poster img  
@@ -40,6 +42,50 @@ export async function viewDetails(movieId) {
             modalTrailer.innerHTML = `<iframe src='https://www.youtube.com/embed/${details.videos.results[0].key}' frameborder='0'></iframe>`;
         } else {
             modalTrailer.innerHTML = 'No trailer available';
+        }
+
+        // Search and display TMDb evaluations
+        const tmdbRatings = await fetchTMDBRatings(movieId);
+        document.getElementById('modal-rating-tmdb').textContent = 
+            (tmdbRatings && tmdbRatings.rating  && tmdbRatings.voteCount)
+            ? `TMDB Rating: ${tmdbRatings.rating} (${tmdbRatings.voteCount} votes)`
+            : 'No TMDB rating available';
+
+        // Search and display OMDB evaluations
+        const omdbRatings = await fetchOMDBRatings(details.imdb_id);
+        document.getElementById('modal-rating-imdb').innerHTML = omdbRatings.length > 0
+            ? omdbRatings.map(rating => `<p>${rating.Source}: ${rating.Value}</p>`).join('')
+            : 'No ratings available';
+
+        // Comments area
+        function loadComments(movieId) {
+            const comments = JSON.parse(localStorage.getItem(`comments_${movieId}`)) || [];
+            const commentsList = document.getElementById('comments-list');
+            commentsList.innerHTML = comments.map(comment => `<li>${comment}</li>`).join('');
+        }
+
+        function addComment(movieId, comment) {
+            const comments = JSON.parse(localStorage.getItem(`comments_${movieId}`)) || [];
+            comments.push(comment);
+            localStorage.setItem(`comments_${movieId}`, JSON.stringify(comments));
+            loadComments(movieId);
+        }
+
+        // Load comments when opening the modal
+        loadComments(movieId);
+
+        // Event listeener for add comment button
+        const submitButton = document.getElementById('submit-comment');
+        if (submitButton) {
+            submitButton.addEventListener('click', () => {
+                const commentInput = document.getElementById('comment-input');
+                const comment = commentInput.value.trim();
+
+                if (comment) {
+                    addComment(movieId, comment);
+                    commentInput.value = '';
+                }
+            });
         }
 
         // Open Modal   

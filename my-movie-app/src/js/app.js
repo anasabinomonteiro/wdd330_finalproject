@@ -7,8 +7,8 @@ import { fetchPopularMovies } from './api.js'; // imported funtion to search for
 
 // When the page load, search for and show popular films
 document.addEventListener('DOMContentLoaded', async () => {
-    console.log('fetching popular movies...');
     try {
+        console.log('fetching popular movies...');
         const movies = await fetchPopularMovies();
         displaySearchResults(movies);
     } catch (error) {
