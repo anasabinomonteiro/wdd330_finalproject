@@ -19,4 +19,14 @@ document.addEventListener('DOMContentLoaded', async () => {
         console.error('Error to search popular movies:', error);
     }
   }
-});
+})
+
+function updateCurrentYear() {
+    const year = document.getElementById('currentYear');
+    if (year) {
+        const currentYear = new Date().getFullYear();
+        year.textContent = currentYear;
+    }
+}
+
+document.addEventListener('DOMContentLoaded', updateCurrentYear);
