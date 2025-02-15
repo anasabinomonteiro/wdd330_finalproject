@@ -99,3 +99,27 @@ export async function fetchWhereToWatch(movieId) {
         return [];
     }
 }
+
+// Function to search for movies with filters
+export async function fetchMoviesWithFilters(query, genre, year, sort) {
+    let url = `${BASE_URL_TMDB}/discover/movie?api_key=${TMDB_API_KEY}&query=${encodeURIComponent(query)}`;
+
+    // Add filters to the URL
+    if (genre) url += `&with_genres=${genre}`;
+    if (year) url += `&primary_release_year=${year}`;
+    if (sort) url += `&sort_by=${sort}`;
+
+    try {
+        const response = await fetch(url);
+
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+
+        const data = await response.json();
+        return data.results;
+    } catch (error) {
+        console.error('Error fetching movies with filters', error);
+        return [];
+    }
+}

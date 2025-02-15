@@ -241,8 +241,8 @@ input{
     position: fixed;
     bottom: 20px;
     right: 20px;
-    background-color: #f5d63b;
-    color: #000000;
+    background-color: #d32f2f;
+    color: #fff;
     padding: 10px 20px;
     border-radius: 5px;
     box-shadow: 0px 4px 6cap rgba(0, 0, 0, 0.1);
@@ -380,6 +380,48 @@ input{
     background-color: #c5f98e;
 } 
 
+/*Filter Section*/
+#filters-section {
+    padding: 10px;
+    background-color: #1a1a1a;
+    color: #fff;
+    border-radius: 8px;
+    margin: 10px 0;
+}
+
+#filters-section form {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 40px;
+    justify-content: center;
+}
+
+#filters-section select,
+#filters-section input[type="number"] {
+    padding: 5px;
+    width: 100px;
+    border: 1px solid #000000;
+    border-radius: 4px;
+    background-color: #4d4c4c;
+    color: #fff;    
+}
+
+#filters-section button {
+    background-color: #d32f2f;
+    color: #fff;
+    padding: 10px 15px;
+    white-space: nowrap;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+#filters-section button:hover {
+    background-color: #e09434;
+}
+
 /*Recommendatons section*/
 
 .recommendations-grid {
@@ -457,24 +499,81 @@ input{
     color: #000000;
 }
 
+footer {
+    background-color: #000000;
+    color: #fff;
+    text-align: center;
+    padding: 15px 10px;
+    font-size: 0.9rem;
+    border-top: 3px solid #d32f2f;
+}
 
-/* Responsive*/
+footer p {
+    margin: 5px 0;
+}
+
+footer a {
+    color: #f5d63b; /* gold to links*/
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.3s ease-in-out;
+}
+
+footer a:hover {
+    color: #e09434; 
+}
+
+/* social icons */
+.footer-icons {
+    margin-top: 10px;
+}
+
+.footer-icons a {
+    display: inline-block;
+    margin: 0 8px;
+    font-size: 1.5rem;
+}
+
+.footer-icons a:hover {
+    transform: scale(1.2);
+}
+
+
+
+/* ********************************************Responsive****************************************************************/
+
+/*----------------------------600px------------------------------------------*/
 @media screen and (max-width: 600px) {
     nav ul {
         flex-direction: column;
         align-items: center;
+        padding: 0;
     }
 
     nav ul li {
         margin: 5px 0;
     }
 
-    #results-container {
+    #results-container,
+    #favorites-container,
+    .recommendations-grid {
+        grid-template-columns: 1fr;
         padding: 10px;
     }
 
-    .result-item {
+    .result-item,
+    .favorite,
+    .movie-card {
         padding: 5px;
+        text-align: center;
+    }
+
+    .result-item img,
+    .favorite img,
+    .movie-card img {
+        width: 80%;
+        border-radius: 8px;
+        height: auto;
     }
 
     #details-section {
@@ -491,11 +590,13 @@ input{
 
     .favorite {
         padding: 5px;
-    }
+    } 
 
+    /* modal */
     .modal-content {
         width: 90%;
         max-height: 80vh;
+        overflow-y: auto;
     }
 
     #modal-trailler iframe {
@@ -503,11 +604,11 @@ input{
     }
 
     #modal-title {
-        font-size: 1.5rem;
+        font-size: 1.2rem;
     }
 
     #modal-poster {
-        max-width: 200px;
+        max-width: 100px;
     }
 
     #modal-description,
@@ -515,4 +616,88 @@ input{
     #modal-where-to-watch{
         font-size: 0.8rem;
     }
+
+    /* filters */
+    #filters-section form {
+        flex-direction: column;
+        gap: 5px;
+    }
+
+    #filters-section select,
+    #filters-section input[type="number"],
+    #filters-section button {
+        width: 100%;
+    }   
+    
+    /* footer*/
+    .footer {
+        padding: 10px;
+        font-size: 0.8rem;
+    }
 }
+/*------------------------992px----------------------------------------------*/
+@media screen and (min-width: 601px) and (max-width: 992px) {
+    /* grid */
+    #results-container,
+    #favorites-container,
+    .recommendations-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap:20px;
+    }
+
+    .result-item,
+    .favorite,
+    .movie-card {
+        padding: 10px;
+        text-align: center;
+    }
+
+    .result-item img,   
+    .favorite img,      
+    .movie-card img {
+        width: 100%;
+        border-radius: 8px;
+        height: auto;
+    }
+
+    /* modal */
+    .modal-content {
+        width: 70%;
+        max-height: 80vh;
+        overflow-y: auto;
+    }
+
+    .modal-title {
+        font-size: 1.4rem;
+    }
+
+    #modal-poster {
+        max-width: 150px;
+    }
+
+    #modal-description,
+    #modal-rating,
+    #modal-where-to-watch {
+        font-size: 0.9rem;
+    }
+
+    #modal-trailer iframe {
+        height: 250px;
+    }
+
+    /* filters */
+    #filters-section form {
+        flex-direction: row;
+        flex-wrap: wrap;
+        gap: 10px;
+    }
+
+    #filters-section select,
+    #filters-section input[type="number"],
+    #filters-section button {
+        width: auto;
+        flex: 1;
+    }
+}
+
