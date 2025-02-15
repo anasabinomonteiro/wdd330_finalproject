@@ -10,12 +10,12 @@ Audience
  People looking for recommendations based on their preferences.
  Users who wish to find out where to watch movies/series available on streaming services.
 
-Trello
+Trello:
 https://trello.com/b/soNJvA3C/wdd330-final-project
 
-Github Page
+Github Page:
 https://anasabinomonteiro.github.io/wdd330_finalproject/
 
-Netlify page
+Netlify page:
 https://movieandseriesearch.netlify.app/
 
