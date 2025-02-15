@@ -15,3 +15,7 @@ https://trello.com/b/soNJvA3C/wdd330-final-project
 
 Github Page
 https://anasabinomonteiro.github.io/wdd330_finalproject/
+
+Netlify page
+https://movieandseriesearch.netlify.app/
+
